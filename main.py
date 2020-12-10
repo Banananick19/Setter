@@ -33,8 +33,8 @@ class MainWindow(tk.Frame):
         errors = run_config(config)
         if errors:
             error_message = str()
-            for app, error_code in errors:
-                error_message += 'app: {} exit with code: {}'.format(app, error_code)
+            for app, error_code in errors.items():
+                error_message += ERROR_FORMAT.format(app, error_code)
             messagebox.showerror('errors', error_message)
 
 def main():
