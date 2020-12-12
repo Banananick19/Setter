@@ -10,7 +10,15 @@ def frame(root, side=TOP, **extras):
     widget.pack(side=side, expand=YES, fill=BOTH)
     if extras: widget.config(**extras)
     return widget
-     
+
+def listbox(root, side=TOP, lines=list(), **extras):
+    widget = Listbox(root)
+    for line in lines:
+        widget.insert(END, line)
+    widget.pack(side=side)
+    if extras: widget.config(**extras)
+    return widget
+
 def label(root, side, text, **extras):
     widget = Label(root, text=text, relief=RIDGE)        # default config
     widget.pack(side=side)        # pack automatically
