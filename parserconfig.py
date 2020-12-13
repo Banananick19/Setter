@@ -42,15 +42,15 @@ class Config:
         self.parser.remove_option(config_name, app_name)
         self.save_changes()
 
-    def rename_config(self, old_config, new_config):
-        apps = self.parser[old_config]
-        self.parser[new_config] = apps
-        self.save_changes()
-
     def rename_app(self, config_name, old_app, new_app):
         app_path = self.configs[config_name][old_app]
         self.parser.remove_option(config_name, old_app)
         self.parser.set(config_name, new_app, app_path)
+        self.save_changes()
+
+    def rename_config(self, old_config, new_config):
+        apps = self.parser[old_config]
+        self.parser[new_config] = apps
         self.save_changes()
 
     def reset_path(self, config_name, app_name, new_path):

@@ -1,7 +1,9 @@
 menu_bar = [
         ('Configs', 0,
             [('new_config',  0, 'self.add_config'),
-             ('append_to_config',  0, 'self.append_to_config'),# lambda:0 is a no-op
+             ('append_to_config',  0, 'self.append_to_config'),
+             ('delete_config',  0, 'self.delete_config'),
+             ('reset_path',  0, 'self.reset_path_apps'),# lambda:0 is a no-op
              ('Quit',  0, 'sys.exit')]),       # use sys, no self here
         ]
 size = [500, 500]
