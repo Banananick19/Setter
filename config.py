@@ -16,6 +16,16 @@ ENCODING_FOR_CONFIG = 'utf-8'
 #Messages
 CONFIG_ALREADY_EXIST_ERROR = 'Уже существует'
 CONFIG_ALREADY_EXIST_ERROR_MESSAGE = 'Конфиг с этим именем уже есть'
+
+CONFIG_APPEND_ERROR = 'Ошибка'
+CONFIG_APPEND_ERROR_MESSAGE = 'Не вышло добавить приложение в конфиг. Возмонжно ошибка пути файла.'
+
+CONFIG_DELETE_CONFIG_ERROR = 'Ошибка'
+CONFIG_DELETE_CONFIG_ERROR_MESSAGE = 'Не вышло удалить конфиг'
+
+CONFIG_RESET_PATH_ERROR = 'Уже существует'
+CONFIG_RESET_PATH_ERROR_MESSAGE = 'Не вышло сменить приложение'
+
 ERROR_BAD_PATH_MESSAGE = 'Неправильный путь файла.'
 ERROR_FORMAT = 'Приложение: {}, не работает из-за ошибки: {}' # first is app name, second error_message
 

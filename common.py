@@ -65,15 +65,16 @@ class MainWindow(Window, ConfigMixin):
                 error_message += ERROR_FORMAT.format(key, message) + '\n'
             showerror(ERROR_BAD_PATH_MESSAGE, error_message)
 
+
     # START MAKE ADD ACTION
 
     def add_config(self):
         self.delete_widgets()
         self.new_config_name = StringVar('')
         self.new_apps = {}
-        self.make_add_form()
+        self.make_new_config_form()
 
-    def make_add_form(self):
+    def make_new_config_form(self):
         entry(self.main_frame, side=TOP, linkvar=self.new_config_name)
         button(self.main_frame, side=TOP, text=APPS_CONFIG_LABEL,
                command=lambda: self.new_apps.update(self.validate_apps(askopenfilenames())))
@@ -95,9 +96,9 @@ class MainWindow(Window, ConfigMixin):
     def append_to_config(self):
         self.delete_widgets()
         self.new_apps = {}
-        self.make_append_to_form()
+        self.make_append_to_config_form()
 
-    def make_append_to_form(self):
+    def make_append_to_config_form(self):
         self.list_config_names = listbox(self.main_frame, lines=self.config.configs.keys())
         button(self.main_frame, side=TOP, text=APPS_CONFIG_LABEL,
                command=lambda: self.new_apps.update(self.validate_apps(askopenfilenames(), self.get_append_to_index())))
@@ -107,7 +108,7 @@ class MainWindow(Window, ConfigMixin):
         try:
             self.config.append_to_config(self.get_current_selection_name(), self.new_apps)
         except:
-            showerror()
+            showerror(CONFIG_APPEND_ERROR, CONFIG_APPEND_ERROR_MESSAGE)
             return
         self.delete_widgets()
         self.make_widgets()
@@ -118,9 +119,9 @@ class MainWindow(Window, ConfigMixin):
 
     def delete_config(self):
         self.delete_widgets()
-        self.make_delete_form()
+        self.make_delete_config_form()
 
-    def make_delete_form(self):
+    def make_delete_config_form(self):
         self.list_config_names = listbox(self.main_frame, lines=self.config.configs.keys())
         button(self.main_frame, side=TOP, text=FORM_SUBMIT_LABEL, command=self.delete_config_action)
 
@@ -130,7 +131,7 @@ class MainWindow(Window, ConfigMixin):
         except:
             showerror()
             return
-        self.delete_widgets()
+        self.delete_widgets(CONFIG_DELETE_CONFIG_ERROR, CONFIG_DELETE_CONFIG_ERROR_MESSAGE)
         self.make_widgets()
 
     # END MAKE APPEND_TO ACTION
@@ -161,7 +162,7 @@ class MainWindow(Window, ConfigMixin):
         try:
             self.config.reset_path(self.config_name, self.app_name, self.current_path)
         except:
-            showerror()
+            showerror(CONFIG_RESET_PATH_ERROR, CONFIG_RESET_PATH_ERROR_MESSAGE)
             return
         self.delete_widgets()
         self.make_widgets()
