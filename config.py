@@ -7,34 +7,34 @@ menu_bar = [
              ('Quit',  0, 'sys.exit')]),       # use sys, no self here
         ]
 size = [500, 500]
-coords = ['center', 'center']
 
+MAIN_FRAME_COLOR = '#f00'
 
 #encoding
 ENCODING_FOR_CONFIG = 'utf-8'
 
 #Messages
-CONFIG_ALREADY_EXIST_ERROR = 'Уже существует'
-CONFIG_ALREADY_EXIST_ERROR_MESSAGE = 'Конфиг с этим именем уже есть'
+CONFIG_ALREADY_EXIST_ERROR = 'Already exists'
+CONFIG_ALREADY_EXIST_ERROR_MESSAGE = 'Set with this name already exist'
 
-CONFIG_APPEND_ERROR = 'Ошибка'
-CONFIG_APPEND_ERROR_MESSAGE = 'Не вышло добавить приложение в конфиг. Возмонжно ошибка пути файла.'
+CONFIG_APPEND_ERROR = 'Error'
+CONFIG_APPEND_ERROR_MESSAGE = 'Can\'t add new app to set'
 
-CONFIG_DELETE_CONFIG_ERROR = 'Ошибка'
-CONFIG_DELETE_CONFIG_ERROR_MESSAGE = 'Не вышло удалить конфиг'
+CONFIG_DELETE_CONFIG_ERROR = 'Error'
+CONFIG_DELETE_CONFIG_ERROR_MESSAGE = 'Delete set wasn\'t finish success'
 
-CONFIG_RESET_PATH_ERROR = 'Уже существует'
-CONFIG_RESET_PATH_ERROR_MESSAGE = 'Не вышло сменить приложение'
+CONFIG_RESET_PATH_ERROR = 'Error'
+CONFIG_RESET_PATH_ERROR_MESSAGE = 'Reset path for app was finish with error'
 
-ERROR_BAD_PATH_MESSAGE = 'Неправильный путь файла.'
-ERROR_FORMAT = 'Приложение: {}, не работает из-за ошибки: {}' # first is app name, second error_message
+ERROR_BAD_PATH_MESSAGE = 'Bad app path.'
+ERROR_FORMAT = 'App: {}, don\'t work: {}' # first is app name, second error_message
 
 # FORM Labels
 
-NAME_CONFIG_LABEL = 'Имя: '
-APPS_CONFIG_LABEL = 'Приложения'
-FORM_SUBMIT_LABEL = 'Создать'
+NAME_CONFIG_LABEL = 'Name: '
+APPS_CONFIG_LABEL = 'Apps'
+FORM_SUBMIT_LABEL = 'Submit'
 
 #Form messages
 
-SUCCESS_MESSAGE = 'Операция выполнена успешно'
+SUCCESS_MESSAGE = 'success'

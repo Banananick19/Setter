@@ -1,7 +1,4 @@
-from tkinter import *
 from tkinter.filedialog import askopenfilenames
-from config import *
-import sys
 from parserconfig import *
 from GUI.widgets import *
 from GUI.guimixin import *
@@ -53,7 +50,7 @@ class MainWindow(Window, ConfigMixin):
 
     def make_widgets(self):
         if not hasattr(self, 'main_frame'):
-            self.main_frame = frame(self, bg='#f00')
+            self.main_frame = frame(self, bg=MAIN_FRAME_COLOR)
         for config in self.config.configs:
             button(self.main_frame, side=TOP, text=config, command=lambda config=config: self.run_config(config))
 
@@ -129,9 +126,9 @@ class MainWindow(Window, ConfigMixin):
         try:
             self.config.delete_config(self.get_current_selection_name())
         except:
-            showerror()
+            showerror(CONFIG_DELETE_CONFIG_ERROR, CONFIG_DELETE_CONFIG_ERROR_MESSAGE)
             return
-        self.delete_widgets(CONFIG_DELETE_CONFIG_ERROR, CONFIG_DELETE_CONFIG_ERROR_MESSAGE)
+        self.delete_widgets()
         self.make_widgets()
 
     # END MAKE APPEND_TO ACTION

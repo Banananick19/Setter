@@ -6,8 +6,6 @@ Use GuiMakerWindowMenu for top-level windows (makes Tk8.0 window menus).
 See the self-test code (and PyEdit) for an example layout tree format.
 ###############################################################################
 """
-
-import sys
 from tkinter import *                     # widget classes
 from tkinter.messagebox import showinfo
 
@@ -15,7 +13,7 @@ from tkinter.messagebox import showinfo
 class GuiMaker(Frame):
     menu_bar = []                       # class defaults
     tool_bar = []                       # change per instance in subclasses
-    helpButton = True                     # set these in start() if need self
+    helpButton = False                     # set these in start() if need self
 
     def __init__(self, root=None):
         Frame.__init__(self, root)
