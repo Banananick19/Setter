@@ -26,9 +26,8 @@ class Config:
 
     def append_to_config(self, config_name, new_apps):
         apps = dict(self.parser[config_name])
-        print(apps)
         apps.update(new_apps)
-        print(apps)
+
         for key, app in apps.items():
             self.parser.set(config_name, key, app)
 

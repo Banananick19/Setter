@@ -24,15 +24,15 @@ class ConfigMixin:
 
     def get_current_selection_name(self):
         pos = self.list_config_names.curselection()
-        return self.list_config_names.get(first=pos)[0]
+        return self.list_config_names.get(first=pos)
 
     def get_current_app_name(self):
         pos = self.list_apps.curselection()
-        return self.list_apps.get(first=pos)[0]
+        return self.list_apps.get(first=pos)
 
     def get_append_to_index(self):
-        pos = self.list_append_to_name.curselection()
-        key = self.list_append_to_name.get(first=pos)[0]
+        pos = self.list_config_names.curselection()
+        key = self.list_config_names.get(first=pos)
         return len(self.config.configs[key]) + 1
 
 
