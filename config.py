@@ -3,12 +3,15 @@ menu_bar = [
             [('new_config',  0, 'self.add_config'),
              ('append_to_config',  0, 'self.append_to_config'),
              ('delete_config',  0, 'self.delete_config'),
-             ('reset_path',  0, 'self.reset_path_apps'),# lambda:0 is a no-op
+             ('reset_path',  0, 'self.reset_path_apps'),
+             ('make_shortcut',  0, 'self.make_shortcut'),# lambda:0 is a no-op
              ('Quit',  0, 'sys.exit')]),       # use sys, no self here
         ]
 size = [500, 500]
 
 MAIN_FRAME_COLOR = '#f00'
+
+SHORTCUTS_TYPES = [('Python Files', '*.pyw'),]
 
 #encoding
 ENCODING_FOR_CONFIG = 'utf-8'

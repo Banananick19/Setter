@@ -3,9 +3,18 @@ import configparser
 from config import *
 
 
-class Config:
+class ConfigMakesMixin:
+    template_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'template.py')
 
-    def __init__(self, file_path='config.ini'):
+    def make_shortcut(self, config, path):
+        with open(path, 'w') as file:
+            file.write(open(self.template_path).read().format(config))
+
+
+class Config(ConfigMakesMixin):
+    config_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'config.ini')
+
+    def __init__(self, file_path=config_path):
         self.parser = configparser.ConfigParser()
         self.parser.read_file(open(file_path, encoding=ENCODING_FOR_CONFIG))
         self.configs = self.parser._sections

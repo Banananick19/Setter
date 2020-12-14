@@ -1,4 +1,4 @@
-from tkinter.filedialog import askopenfilenames
+from tkinter.filedialog import askopenfilenames, asksaveasfilename
 from parserconfig import *
 from GUI.widgets import *
 from GUI.guimixin import *
@@ -163,5 +163,24 @@ class MainWindow(Window, ConfigMixin):
             return
         self.delete_widgets()
         self.make_widgets()
+
+    # END MAKE MAKE_SHORTCUT ACTION
+
+    def make_shortcut(self):
+        self.delete_widgets()
+        self.make_make_shortcut_form()
+
+    def make_make_shortcut_form(self):
+        self.list_config_names = listbox(self.main_frame, lines=self.config.configs.keys())
+        button(self.main_frame, side=TOP, text=FORM_SUBMIT_LABEL, command=self.make_shortcut_action)
+
+    def make_shortcut_action(self):
+
+        self.config.make_shortcut(repr(self.get_current_selection_name()), asksaveasfilename(filetypes=SHORTCUTS_TYPES))
+
+        self.delete_widgets()
+        self.make_widgets()
+
+
 
     # END MAKE APPEND_TO ACTION
