@@ -2,17 +2,17 @@ import os
 import configparser
 from config import *
 
-
 class ConfigMakesMixin:
-    template_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'template.py')
+    template_path = os.path.join(MAIN_PATH, 'template.py')
 
     def make_shortcut(self, config, path):
         with open(path, 'w') as file:
-            file.write(open(self.template_path).read().format(config))
+            file.write(open(self.template_path).read().format(config_name=config, programm_path=repr(MAIN_PATH)))
 
 
 class Config(ConfigMakesMixin):
-    config_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'config.ini')
+    config_path = os.path.join(MAIN_PATH, 'config.ini')
+
 
     def __init__(self, file_path=config_path):
         self.parser = configparser.ConfigParser()

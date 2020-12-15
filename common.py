@@ -176,7 +176,7 @@ class MainWindow(Window, ConfigMixin):
 
     def make_shortcut_action(self):
 
-        self.config.make_shortcut(repr(self.get_current_selection_name()), asksaveasfilename(filetypes=SHORTCUTS_TYPES))
+        self.config.make_shortcut(repr(self.get_current_selection_name()), asksaveasfilename(initialfile=self.get_current_selection_name() + '.py', filetypes=SHORTCUTS_TYPES))
 
         self.delete_widgets()
         self.make_widgets()

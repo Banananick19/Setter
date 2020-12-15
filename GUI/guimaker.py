@@ -6,19 +6,21 @@ Use GuiMakerWindowMenu for top-level windows (makes Tk8.0 window menus).
 See the self-test code (and PyEdit) for an example layout tree format.
 ###############################################################################
 """
-from tkinter import *                     # widget classes
+import tkinter as tk                  # widget classes
 from tkinter.messagebox import showinfo
+import sys
 
+class GuiMaker(tk.Frame):
+    """Make Gui for default api"""
 
-class GuiMaker(Frame):
     menu_bar = []                       # class defaults
     tool_bar = []                       # change per instance in subclasses
-    helpButton = False                     # set these in start() if need self
+    help_button = False                     # set these in start() if need self
 
     def __init__(self, root=None):
-        Frame.__init__(self, root)
+        tk.Frame.__init__(self, root)
         self.root = root
-        self.pack(expand=YES, fill=BOTH)        # make frame stretchable
+        self.pack(expand=tk.YES, fill=tk.BOTH)        # make frame stretchable
         self.start()                            # for subclass: set menu/tool_bar
         self.make_menu_bar()                      # done here: build menu bar
         self.make_tool_bar()                      # done here: build toolbar
@@ -30,35 +32,36 @@ class GuiMaker(Frame):
         expand=no, fill=x so same width on resize
         """
 
-        menubar = Frame(self, relief=RAISED, bd=2)
-        menubar.pack(side=TOP, fill=X)
+        menubar = tk.Frame(self, relief=tk.RAISED, bd=2)
+        menubar.pack(side=tk.TOP, fill=tk.X)
 
         for (name, key, items) in self.menu_bar:
-            mbutton = Menubutton(menubar, text=name, underline=key)
-            mbutton.pack(side=LEFT)
-            pulldown = Menu(mbutton)
+            mbutton = tk.Menubutton(menubar, text=name, underline=key)
+            mbutton.pack(side=tk.LEFT)
+            pulldown = tk.Menu(mbutton)
             self.add_menu_items(pulldown, items)
             mbutton.config(menu=pulldown)
 
-        if self.helpButton:
-            Button(menubar, text    = 'Help',
+        if self.help_button:
+            tk.Button(menubar, text    = 'Help',
                             cursor  = 'gumby',
-                            relief  = FLAT,
-                            command = self.help).pack(side=RIGHT)
+                            relief  = tk.FLAT,
+                            command = self.help).pack(side=tk.RIGHT)
 
     def add_menu_items(self, menu, items):
+        """ Add items for menu """
         for item in items:                     # scan nested items list
             if item == 'separator':            # string: add separator
                 menu.add_separator({})
-            elif type(item) == list:           # list: disabled item list
+            elif isinstance(item, list):           # list: disabled item list
                 for num in item:
-                    menu.entryconfig(eval(num), state=DISABLED)
-            elif type(item[2]) != list:
+                    menu.entryconfig(eval(num), state=tk.DISABLED)
+            elif not isinstance(item[2], list):
                 menu.add_command(label     = item[0],         # command:
                                  underline = item[1],         # add command
-                                 command   = eval(item[2]) if type(item[2]) == str else item[2])         # cmd=callable
+                                 command   = eval(item[2]))         # cmd=callable
             else:
-                pullover = Menu(menu) 
+                pullover = tk.Menu(menu)
                 self.add_menu_items(pullover, item[2])          # sublist:
                 menu.add_cascade(label     = item[0],         # make submenu
                                  underline = item[1],         # add cascade
@@ -72,20 +75,21 @@ class GuiMaker(Frame):
         would need prebuilt gifs or PIL for thumbnails
         """
         if self.tool_bar:
-            toolbar = Frame(self, cursor='hand2', relief=SUNKEN, bd=2)
-            toolbar.pack(side=BOTTOM, fill=X)
+            toolbar = tk.Frame(self, cursor='hand2', relief=tk.SUNKEN, bd=2)
+            toolbar.pack(side=tk.BOTTOM, fill=tk.X)
             for (name, action, where) in self.tool_bar:
-                Button(toolbar, text=name, command=action).pack(where)
+                tk.Button(toolbar, text=name, command=action).pack(where)
 
     def make_widgets(self):
+        """This method must be defined in subclass"""
         pass
 
     def help(self):
-        "override me in subclass"
+        """override me in subclass"""
         showinfo('Help', 'Sorry, no help for ' + self.__class__.__name__)
 
-    def start(self): 
-        "override me in subclass: set menu/toolbar with self"
+    def start(self):
+        """override me in subclass: set menu/toolbar with self"""
         pass
 
 
@@ -95,21 +99,23 @@ class GuiMaker(Frame):
 
 GuiMakerFrameMenu = GuiMaker           # use this for embedded component menus
 
-class GuiMakerWindowMenu(GuiMaker):    # use this for top-level window menus
-    def makeMenuBar(self):
-        menubar = Menu(self.master)
+class GuiMakerWindowMenu(GuiMaker):
+    """GuiMaker, which use window for make menu"""
+    # use this for top-level window menus
+    def make_menu_bar(self):
+        menubar = tk.Menu(self.master)
         self.master.config(menu=menubar)
 
         for (name, key, items) in self.menu_bar:
-            pulldown = Menu(menubar)
+            pulldown = tk.Menu(menubar)
             self.add_menu_items(pulldown, items)
             menubar.add_cascade(label=name, underline=key, menu=pulldown)
 
-        if self.helpButton:
+        if self.help_button:
             if sys.platform[:3] == 'win':
                 menubar.add_command(label='Help', command=self.help)
             else:
-                pulldown = Menu(menubar)  # Linux needs real pull down
+                pulldown = tk.Menu(menubar)  # Linux needs real pull down
                 pulldown.add_command(label='About', command=self.help)
                 menubar.add_cascade(label='Help', menu=pulldown)
 
@@ -145,8 +151,8 @@ if __name__ == '__main__':
             self.menu_bar = menu_bar
             self.tool_bar = tool_bar    # guimaker help, not guimixin
 
-    root = Tk()
-    TestAppFrameMenu(Toplevel())
-    TestAppWindowMenu(Toplevel())
+    root = tk.Tk()
+    TestAppFrameMenu(tk.Toplevel())
+    TestAppWindowMenu(tk.Toplevel())
     TestAppWindowMenuBasic(root)
     root.mainloop()

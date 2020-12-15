@@ -1,3 +1,10 @@
+"""
+    This module contains a constants of config.
+"""
+import os
+
+MAIN_PATH = os.path.dirname(__file__)
+
 menu_bar = [
         ('Configs', 0,
             [('new_config',  0, 'self.add_config'),
@@ -11,7 +18,7 @@ size = [500, 500]
 
 MAIN_FRAME_COLOR = '#f00'
 
-SHORTCUTS_TYPES = [('Python Files', '*.pyw'),]
+SHORTCUTS_TYPES = [('Python Files', '*.py'),]
 
 #encoding
 ENCODING_FOR_CONFIG = 'utf-8'
