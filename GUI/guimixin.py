@@ -9,8 +9,8 @@ with a Frame (or a subclass derived from Frame) for its quit method
 from tkinter import *
 from tkinter.messagebox import *
 from tkinter.filedialog import *
-from PP4E.Gui.Tour.scrolledtext import ScrolledText     # or tkinter.scrolledtext
-from PP4E.launchmodes import PortableLauncher, System   # or use multiprocessing
+#from PP4E.Gui.Tour.scrolledtext import ScrolledText     # or tkinter.scrolledtext
+#from PP4E.launchmodes import PortableLauncher, System   # or use multiprocessing
 
 class GuiMixin:
     def infobox(self, title, text, *args):              # use standard dialogs
@@ -44,19 +44,19 @@ class GuiMixin:
         myclass = self.__class__           # instance's (lowest) class object
         myclass(new, *args)                # attach/run instance to new window
 
-    def spawn(self, pycmdline, wait=False):
-        if not wait:                                     # start new process
-            PortableLauncher(pycmdline, pycmdline)()     # run Python progam
-        else:
-            System(pycmdline, pycmdline)()               # wait for it to exit
+#     def spawn(self, pycmdline, wait=False):
+#         if not wait:                                     # start new process
+#             PortableLauncher(pycmdline, pycmdline)()     # run Python progam
+#         else:
+#             System(pycmdline, pycmdline)()               # wait for it to exit
 
-    def browser(self, filename):
-        new  = Toplevel()                                # make new window
-        view = ScrolledText(new, file=filename)          # Text with Scrollbar
-        view.text.config(height=30, width=85)            # config Text in Frame
-        view.text.config(font=('courier', 10, 'normal')) # use fixed-width font
-        new.title("Text Viewer")                         # set window mgr attrs
-        new.iconname("browser")                          # file text added auto
+#     def browser(self, filename):
+#         new  = Toplevel()                                # make new window
+#         view = ScrolledText(new, file=filename)          # Text with Scrollbar
+#         view.text.config(height=30, width=85)            # config Text in Frame
+#         view.text.config(font=('courier', 10, 'normal')) # use fixed-width font
+#         new.title("Text Viewer")                         # set window mgr attrs
+#         new.iconname("browser")                          # file text added auto
  
     """
     def browser(self, filename):                         # if tkinter.scrolledtext
